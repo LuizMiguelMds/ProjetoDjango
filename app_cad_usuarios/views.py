@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Usuario
 
 def home(request):
-    return render(request, 'usuarios/home.html')  # O caminho dentro de 'templates'
+    return render(request, 'usuarios/home.html')
 
 def usuarios(request):
     if request.method == "POST":
@@ -12,11 +12,12 @@ def usuarios(request):
         )
         novo_usuario.save()
 
-    usuarios = Usuario.objects.all()  # Corrigindo a passagem de dados
+    usuarios = Usuario.objects.all()
     return render(request, 'usuarios/usuarios.html', {'usuarios': usuarios})
 
-
 def listagem_usuarios(request):
-    usuarios = Usuario.objects.all()  # Buscar todos os usuários
-    return render(request, 'usuarios/listagem.html', {'usuarios': usuarios})
-
+    usuarios = Usuario.objects.all()
+    print(f"Total de usuários encontrados: {usuarios.count()}")
+    for usuario in usuarios:
+        print(f"ID: {usuario.id_usuario}, Nome: {usuario.nome}, Idade: {usuario.idade}")
+    return render(request, 'usuarios/usuarios.html', {'usuarios': usuarios})

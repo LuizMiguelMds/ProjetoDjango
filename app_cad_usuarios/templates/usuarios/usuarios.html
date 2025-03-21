@@ -1,5 +1,11 @@
-<div class="container">
-    <table>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listagem de Usuários</title>
+</head>
+<body>
+    <h1>Usuários Cadastrados</h1>
+    <table border="1">
         <tr>
             <th>id</th>
             <th>nome</th>
@@ -7,10 +13,17 @@
         </tr>
         {% for usuario in usuarios %}
         <tr>
-            <td>{{usuario.id}}</td>
-            <td>{{usuario.nome}}</td>
-            <td>{{usuario.idade}}</td>
+            <td>{{ usuario.id_usuario }}</td>
+            <td>{{ usuario.nome }}</td>
+            <td>{{ usuario.idade }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">Nenhum usuário cadastrado.</td>
         </tr>
         {% endfor %}
     </table>
-</div>
+    <br>
+    <a href="/">Voltar</a>
+</body>
+</html>

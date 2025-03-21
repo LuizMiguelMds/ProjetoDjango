@@ -44,7 +44,7 @@ ROOT_URLCONF = 'projeto_cad_usuarios.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'app_cad_usuarios/templates'],  # Adicione este caminho
+        'DIRS': [BASE_DIR / 'app_cad_usuarios' / 'templates'],  # Adicione este caminho
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
