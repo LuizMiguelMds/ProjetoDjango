@@ -1,23 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Usuario
+from django.contrib import messages
 
 def home(request):
     return render(request, 'usuarios/home.html')
 
-def usuarios(request):
-    if request.method == "POST":
-        novo_usuario = Usuario(
-            nome=request.POST.get('nome'),
-            idade=request.POST.get('idade')
-        )
-        novo_usuario.save()
-
-    usuarios = Usuario.objects.all()
-    return render(request, 'usuarios/usuarios.html', {'usuarios': usuarios})
-
 def listagem_usuarios(request):
+    if request.method == "POST":
+        Usuario.objects.create(
+            nome=request.POST['nome'],  # Usando colchetes para forçar erro se faltar
+            idade=request.POST['idade']
+        )
+        messages.success(request, 'Usuário cadastrado com sucesso!')  # 👈 Feedback
+        return redirect('listagem_usuarios')  # 🚨 Sempre redirecione após POST
+
     usuarios = Usuario.objects.all()
-    print(f"Total de usuários encontrados: {usuarios.count()}")
-    for usuario in usuarios:
-        print(f"ID: {usuario.id_usuario}, Nome: {usuario.nome}, Idade: {usuario.idade}")
     return render(request, 'usuarios/usuarios.html', {'usuarios': usuarios})
